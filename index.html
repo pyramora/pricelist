@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بيرامورا | اختر قائمة الأسعار المناسبة لمشروعك</title>
+<meta name="description" content="بيرامورا - حلول تغليف احترافية. تصفح أسعار القطاعي، الجملة، البرطمانات والزجاجات، وباقي خدماتنا في مكان واحد.">
+<meta property="og:title" content="بيرامورا | قوائم الأسعار">
+<meta property="og:description" content="اختر قائمة الأسعار المناسبة لمشروعك - قطاعي، جملة، برطمانات وزجاجات، وخدمات تغليف متكاملة.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --gold:#C8A24D;
+    --gold-soft:#DEC685;
+    --gold-deep:#9C7A34;
+    --white:#FFFFFF;
+    --bg:#FAF8F3;
+    --panel:#FFFFFF;
+    --text:#2A2A2A;
+    --text-soft:#83807A;
+    --line:rgba(42,42,42,.08);
+    --line-gold:rgba(200,162,77,.28);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Cairo',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  a{text-decoration:none;color:inherit;}
+  button{font-family:inherit;border:none;background:none;cursor:pointer;}
+  ::selection{background:var(--gold-soft);color:#2a2a2a;}
+  img{display:block;}
+
+  /* ---------- Subtle ambience (kept quiet) ---------- */
+  .ambient{position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none;}
+  .blob{
+    position:absolute; border-radius:50%; filter:blur(90px); opacity:.16;
+    background:radial-gradient(circle at 35% 35%, var(--gold-soft), transparent 70%);
+  }
+  .blob.b1{width:480px;height:480px; top:-180px; right:-140px;}
+  .blob.b2{width:380px;height:380px; bottom:-160px; left:-120px; opacity:.10;}
+
+  section{position:relative; z-index:1;}
+
+  .reveal{opacity:0; transform:translateY(20px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height:92svh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:60px 24px 90px;
+  }
+  .logo-mark{
+    width:76px; height:auto; margin-bottom:24px;
+    filter:drop-shadow(0 6px 14px rgba(156,122,52,.18));
+  }
+  .brand-name{
+    font-weight:700; font-size:15px; letter-spacing:.5px; color:var(--gold-deep);
+    margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(28px, 4.6vw, 48px);
+    font-weight:700; line-height:1.35; letter-spacing:-.3px;
+    max-width:760px; color:var(--text);
+  }
+  .hero p.sub{
+    margin-top:20px; font-size:clamp(15px,1.8vw,17px); color:var(--text-soft);
+    max-width:520px; line-height:1.85; font-weight:400;
+  }
+  .scroll-cue{
+    position:absolute; bottom:36px; display:flex; flex-direction:column; align-items:center; gap:8px;
+    color:var(--text-soft); font-size:12.5px; font-weight:500;
+  }
+  .scroll-cue .arrow{
+    width:18px; height:18px; border-left:2px solid var(--gold); border-bottom:2px solid var(--gold);
+    transform:rotate(-45deg); animation:bounce 2s ease-in-out infinite;
+  }
+  @keyframes bounce{
+    0%,100%{transform:rotate(-45deg) translateY(0);}
+    50%{transform:rotate(-45deg) translateY(6px);}
+  }
+
+  /* ---------- Cards layout ---------- */
+  .cards-section{padding:10px 20px 100px;}
+  .cards-wrap{
+    max-width:1120px; margin:0 auto;
+    display:grid; grid-template-columns:1fr; gap:22px;
+  }
+  @media(min-width:860px){
+    .cards-wrap{grid-template-columns:1fr 1fr;}
+    .card-wholesale{grid-column:1 / -1;}
+  }
+
+  .card{
+    position:relative;
+    background:var(--panel);
+    border-radius:22px;
+    padding:34px 30px;
+    border:1px solid var(--line);
+    transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    overflow:hidden;
+    display:flex; flex-direction:column;
+  }
+  .card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 40px -20px rgba(42,42,42,.16);
+    border-color:var(--line-gold);
+  }
+  .card:active{transform:translateY(-2px) scale(.996);}
+
+  .icon-badge{
+    width:54px; height:54px; border-radius:16px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px; color:var(--gold-deep);
+    background:rgba(200,162,77,.09);
+    margin-bottom:20px;
+  }
+  .card h3{font-size:21px; font-weight:700; margin-bottom:6px;}
+  .card .card-sub{font-size:13.5px; font-weight:600; color:var(--gold-deep); margin-bottom:14px; display:flex; align-items:center; gap:7px;}
+  .card .card-sub i{font-size:12px;}
+  .card p.desc{font-size:14.5px; color:var(--text-soft); line-height:1.85; margin-bottom:18px;}
+
+  .benefits{list-style:none; display:flex; flex-direction:column; gap:9px; margin-bottom:18px;}
+  .benefits li{font-size:14px; display:flex; align-items:center; gap:9px; color:var(--text);}
+  .benefits li i{color:var(--gold); font-size:12px; flex-shrink:0; width:14px; text-align:center;}
+  .note{font-size:12.5px; color:#a19d95; margin-bottom:18px; line-height:1.7; display:flex; gap:6px; align-items:flex-start;}
+  .note i{margin-top:2px; font-size:11px;}
+
+  .cta{
+    margin-top:auto;
+    display:inline-flex; align-items:center; justify-content:center; gap:9px;
+    padding:14px 24px; border-radius:12px; font-weight:700; font-size:14.5px;
+    background:var(--text); color:#fff;
+    transition:gap .3s ease, background .3s ease;
+    width:100%;
+  }
+  .cta i{transition:transform .3s ease; font-size:13px;}
+  .card:hover .cta i{transform:translateX(-4px);}
+  .card:hover .cta{gap:12px;}
+  .card-standard .cta:hover{background:var(--gold-deep);}
+
+  /* ---------- Wholesale — the visibly preferred choice ---------- */
+  .card-wholesale{
+    background:linear-gradient(155deg, #FFFCF5 0%, #FAF0DA 100%);
+    border:2px solid var(--gold);
+    padding:42px 38px;
+    box-shadow:0 30px 60px -26px rgba(156,122,52,.42), 0 0 0 6px rgba(200,162,77,.08);
+  }
+  .card-wholesale:hover{
+    box-shadow:0 36px 70px -24px rgba(156,122,52,.5), 0 0 0 6px rgba(200,162,77,.12);
+  }
+  .ribbon{
+    position:absolute; top:22px; left:22px;
+    background:linear-gradient(120deg, var(--gold-deep), var(--gold)); color:#fff; font-weight:700; font-size:12.5px;
+    padding:8px 17px; border-radius:999px;
+    display:flex; align-items:center; gap:6px;
+    box-shadow:0 6px 16px -4px rgba(156,122,52,.5);
+  }
+  .ribbon i{color:#fff; font-size:11px;}
+  .card-wholesale .icon-badge{
+    background:linear-gradient(145deg, var(--gold), var(--gold-deep));
+    color:#fff;
+    width:58px; height:58px; font-size:24px;
+  }
+  .card-wholesale h3{font-size:28px;}
+  .card-wholesale .card-sub{font-size:15px;}
+  .card-wholesale p.desc{font-size:15.5px; max-width:600px;}
+  .wholesale-grid{
+    display:grid; grid-template-columns:1fr; gap:24px; margin-top:4px;
+  }
+  @media(min-width:760px){
+    .wholesale-grid{grid-template-columns:1.15fr .85fr; align-items:center;}
+  }
+  .margin-box{
+    background:rgba(255,255,255,.7);
+    border:1px solid var(--line-gold);
+    border-radius:16px; padding:20px 22px;
+    font-size:14px; line-height:1.85; color:var(--text);
+  }
+  .margin-box i{color:var(--gold-deep); margin-left:8px;}
+  .card-wholesale .cta{
+    background:linear-gradient(120deg, var(--gold-deep), var(--gold)); color:#fff; font-size:16px; padding:17px 26px;
+    box-shadow:0 10px 24px -8px rgba(156,122,52,.5);
+  }
+  .card-wholesale .cta:hover{filter:brightness(1.08);}
+
+  /* ---------- Footer ---------- */
+  footer{
+    text-align:center; padding:46px 20px 36px;
+    color:var(--text-soft); font-size:13.5px;
+    border-top:1px solid var(--line);
+  }
+  footer strong{color:var(--text); font-weight:700;}
+
+  @media (max-width:480px){
+    .card-wholesale{padding:30px 20px;}
+    .card{padding:26px 20px;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;}
+  }
+
+  :focus-visible{outline:3px solid var(--gold); outline-offset:3px; border-radius:8px;}
+</style>
+</head>
+<body>
+
+<div class="ambient" aria-hidden="true">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+</div>
+
+<header class="hero">
+  <img class="logo-mark" src="data:image/png;base64,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" alt="بيرامورا">
+  <span class="brand-name">بيرامورا</span>
+  <h1>اختر قائمة الأسعار المناسبة لمشروعك</h1>
+  <p class="sub">سواء كنت تبدأ مشروعك أو تطلب بكميات كبيرة، ستجد القائمة المناسبة بكل سهولة.</p>
+  <div class="scroll-cue">
+    <span>مرر لأسفل</span>
+    <span class="arrow"></span>
+  </div>
+</header>
+
+<main>
+<section class="cards-section" aria-label="قوائم الأسعار">
+  <div class="cards-wrap">
+
+    <!-- CARD: WHOLESALE (recommended, shown first) -->
+    <a class="card card-wholesale reveal" href="https://drive.google.com/file/d/1lU_0pPCD5wHCSkZVRQxqMn7Zd2HoIELC/view?usp=drive_link" target="_blank" rel="noopener" aria-label="ابدأ بالجملة - الاختيار الموصى به">
+      <span class="ribbon"><i class="fa-solid fa-star"></i> الاختيار الأذكى · الأكثر توفيرًا</span>
+      <div class="wholesale-grid">
+        <div>
+          <div class="icon-badge"><i class="fa-solid fa-boxes-stacked" aria-hidden="true"></i></div>
+          <h3>أسعار الجملة</h3>
+          <p class="card-sub"><i class="fa-solid fa-crown" aria-hidden="true"></i> الخيار المفضّل لدى معظم أصحاب المشاريع</p>
+          <p class="desc">إذا كنت تخطط للنمو أو البيع باستمرار، فهذا هو الاختيار الذي يوفر عليك أكثر ويمنحك أفضل قيمة — ومعظم عملائنا يبدؤون من هنا مباشرة.</p>
+          <ul class="benefits">
+            <li><i class="fa-solid fa-pallet"></i> تبدأ من 300 قطعة فقط</li>
+            <li><i class="fa-solid fa-tags"></i> أسعار أقل بشكل ملحوظ</li>
+            <li><i class="fa-solid fa-pen-ruler"></i> إمكانية التخصيص الكامل</li>
+            <li><i class="fa-solid fa-piggy-bank"></i> أوفر على المدى الطويل</li>
+            <li><i class="fa-solid fa-medal"></i> أفضل قيمة مقابل السعر</li>
+          </ul>
+        </div>
+        <div>
+          <div class="margin-box">
+            <i class="fa-solid fa-chart-line"></i>
+            كلما زادت الكمية، انخفضت تكلفة القطعة، مما يمنح مشروعك هامش ربح أفضل. هذا ما يجعل الجملة الخيار الأذكى لأي مشروع جاد.
+          </div>
+        </div>
+      </div>
+      <span class="cta"><i class="fa-solid fa-tag"></i> ابدأ بالجملة الآن <i class="fa-solid fa-arrow-left"></i></span>
+    </a>
+
+    <!-- CARD: RETAIL -->
+    <a class="card card-standard reveal" href="https://drive.google.com/file/d/1lzFG9JZN9Z2PcEjQoxI95HOmv_Tysfyq/view?usp=drive_link" target="_blank" rel="noopener" aria-label="عرض أسعار القطاعي">
+      <div class="icon-badge"><i class="fa-solid fa-seedling" aria-hidden="true"></i></div>
+      <h3>أسعار قطاعي</h3>
+      <p class="card-sub"><i class="fa-solid fa-bolt" aria-hidden="true"></i> ابدأ بكميات صغيرة بكل سهولة</p>
+      <p class="desc">مثالية للمشاريع الجديدة أو التجارب الأولى، ويمكنك الطلب ابتداءً من 50 قطعة فقط.</p>
+      <ul class="benefits">
+        <li><i class="fa-solid fa-cubes-stacked"></i> تبدأ من 50 قطعة</li>
+        <li><i class="fa-solid fa-box-open"></i> منتجات جاهزة</li>
+        <li><i class="fa-solid fa-flask"></i> مناسبة للتجربة</li>
+        <li><i class="fa-solid fa-bolt"></i> سرعة في التنفيذ</li>
+      </ul>
+      <p class="note"><i class="fa-solid fa-circle-info"></i> الأسعار أعلى من أسعار الجملة بسبب الكميات الأقل.</p>
+      <span class="cta"><i class="fa-solid fa-tag"></i> عرض الأسعار <i class="fa-solid fa-arrow-left"></i></span>
+    </a>
+
+    <!-- CARD: JARS -->
+    <a class="card card-standard reveal" href="https://drive.google.com/file/d/138NwTvHjh9DCnNylTfk3EW4HbHqT50EF/view?usp=drive_link" target="_blank" rel="noopener" aria-label="تصفح قائمة البرطمانات والزجاجات">
+      <div class="icon-badge"><i class="fa-solid fa-wine-bottle" aria-hidden="true"></i></div>
+      <h3>برطمانات وزجاجات</h3>
+      <p class="card-sub"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> كل العبوات في مكان واحد</p>
+      <p class="desc">تصفح مجموعتنا من البرطمانات والزجاجات والعبوات البلاستيكية والزجاجية بأحجام متعددة تناسب مختلف الاستخدامات.</p>
+      <ul class="benefits">
+        <li><i class="fa-solid fa-jug-detergent"></i> برطمانات</li>
+        <li><i class="fa-solid fa-wine-bottle"></i> زجاجات</li>
+        <li><i class="fa-solid fa-prescription-bottle"></i> عبوات</li>
+        <li><i class="fa-solid fa-ruler-combined"></i> أحجام متنوعة</li>
+      </ul>
+      <span class="cta"><i class="fa-solid fa-tag"></i> تصفح القائمة <i class="fa-solid fa-arrow-left"></i></span>
+    </a>
+
+    <!-- CARD: SERVICES -->
+    <a class="card card-standard reveal" href="https://drive.google.com/file/d/1rN5bCDHTrKLqj5S4_VWxUj6tdx5vB6u-/view?usp=drive_link" target="_blank" rel="noopener" aria-label="اكتشف باقي خدماتنا">
+      <div class="icon-badge"><i class="fa-solid fa-swatchbook" aria-hidden="true"></i></div>
+      <h3>نقدر نعملك إيه تاني؟</h3>
+      <p class="card-sub"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> حلول تغليف متكاملة</p>
+      <p class="desc">اكتشف كل الخدمات التي نقدمها لمساعدتك في بناء هوية احترافية لمنتجك.</p>
+      <ul class="benefits">
+        <li><i class="fa-solid fa-bag-shopping"></i> أكياس</li>
+        <li><i class="fa-solid fa-box"></i> بوكسات</li>
+        <li><i class="fa-solid fa-tags"></i> استيكرات</li>
+        <li><i class="fa-solid fa-id-card"></i> كروت</li>
+        <li><i class="fa-solid fa-print"></i> طباعة</li>
+        <li><i class="fa-solid fa-pen-nib"></i> تصميم</li>
+        <li><i class="fa-solid fa-gifts"></i> تغليف كامل</li>
+      </ul>
+      <span class="cta"><i class="fa-solid fa-tag"></i> اكتشف خدماتنا <i class="fa-solid fa-arrow-left"></i></span>
+    </a>
+
+  </div>
+</section>
+</main>
+
+<footer>
+  <strong>بيرامورا</strong> — حلول تغليف احترافية لمشروعك
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:.15});
+  revealEls.forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
